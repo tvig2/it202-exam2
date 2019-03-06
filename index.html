@@ -21,10 +21,6 @@
     
     <ul class="list-group">
         <li class="list-group-item d-flex justify-content-between align-items-center">
-            
-            <span class="badge badge-primary badge-pill">14</span>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">
             Dapibus ac facilisis in
             <span class="badge badge-primary badge-pill">2</span>
         </li>
@@ -49,6 +45,7 @@
 		$(document).ready(function(){
 
           var url = "https://data.cityofchicago.org/resource/xzkq-xp2w.json";
+          var groupings = "https://data.cityofchicago.org/resource/xzkq-xp2w.json?$select=department,count(department)&$group=department";
 
           $.get(url, function(response) {
               console.log(response);
@@ -58,31 +55,32 @@
               $.each(data, function(i,v){
                 console.log(i,v);
 
-            // clone card
-            var clone = $(".template").clone();
-            // update values
-            clone.find(".card-title").text(v.name);
+                // clone card
+                var clone = $(".template").clone();
+                // update values
+                clone.find(".card-title").text(v.name);
 
-            clone.find(".card-title").addClass(v.results);
+                clone.find(".card-title").addClass(v.results);
 
-            clone.find(".card-title").attr("data-results", v.results);
+                clone.find(".card-title").attr("data-results", v.results);
 
-            clone.find(".card-subtitle").text(v.department);
+                clone.find(".card-subtitle").text(v.department);
               
-            clone.find(".card-text").text(v.job_titles);
+                clone.find(".card-text").text(v.job_titles);
             
-            clone.removeClass("template");
+                clone.removeClass("template");
             
 
 
-            // insert into DOM
-            $("body").append(clone);
+                // insert into DOM
+                $("body").append(clone);
 
+              });
+              
           });
-
-
-      });
-
+            
+            
+          
       
 
 
